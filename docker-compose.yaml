@@ -1,0 +1,17 @@
+services:
+  openvpn-as:
+    image: openvpn/openvpn-as:2.14.1-ff013d4d-Ubuntu22 
+    container_name: openvpn-as
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    cap_add:
+      - NET_ADMIN
+      - MKNOD
+    ports:
+      - 943:943      # 管理后台
+      - 443:443      # 客户端下载及配置文件界面
+      - 1194:1194/udp    # vpn 数据流量通道，默认udp
+    volumes:
+      - ./data:/openvpn        # openvpn as 配置文件
+      - ./data/pyovpn-2.0-py3.10.egg:/usr/local/openvpn_as/lib/python/pyovpn-2.0-py3.10.egg   # 解除限制及汉化文件
+    restart: unless-stopped
