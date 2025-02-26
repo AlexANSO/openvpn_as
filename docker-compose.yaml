@@ -1,6 +1,7 @@
 services:
   openvpn-as:
-    image: openvpn/openvpn-as:2.14.1-ff013d4d-Ubuntu22 
+    # 亲测2.13.1可用
+    image: openvpn/openvpn-as:2.13.1-d8cdeb9c-Ubuntu22
     container_name: openvpn-as
     devices:
       - /dev/net/tun:/dev/net/tun
